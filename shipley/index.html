@@ -14,10 +14,12 @@ minuteHand.style['transform-origin'] = '50% 84%';
 
 setInterval(() => {
     const now = new Date()
-    let hourHandAngle = (now.getHours() / 24) * 360 * 2
-    let minuteHandAngle = (now.getMinutes() / 60) * 360
+    let nowMinutes = now.getMinutes()
+    let minuteHandAngle = (nowMinutes / 60) * 360
+    let hourHandOffset = (nowMinutes / 60 / 12) * 360 
+    let hourHandAngle = (now.getHours() / 24) * 360 * 2 + hourHandOffset
 
     hourHand.style.transform = `rotate(${hourHandAngle}deg)`;
     minuteHand.style.transform = `rotate(${minuteHandAngle}deg)`;
-}, 20)
+}, 1000)
 </script>
