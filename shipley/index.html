@@ -1,0 +1,23 @@
+<img src='shipley-no-hands.png' style=''>
+<img src='hour-hand.png' style='position:absolute;' id='hourHand'>
+<img src='minute-hand.png' style='position:absolute;' id='minuteHand'>
+<script>
+const hourHand = document.getElementById('hourHand')
+hourHand.style.top = 672
+hourHand.style.left = 840
+hourHand.style['transform-origin'] = '50% 82%';
+
+const minuteHand = document.getElementById('minuteHand')
+minuteHand.style.top = 644
+minuteHand.style.left = 840
+minuteHand.style['transform-origin'] = '50% 84%';
+
+setInterval(() => {
+    const now = new Date()
+    let hourHandAngle = (now.getHours() / 24) * 360 * 2
+    let minuteHandAngle = (now.getMinutes() / 60) * 360
+
+    hourHand.style.transform = `rotate(${hourHandAngle}deg)`;
+    minuteHand.style.transform = `rotate(${minuteHandAngle}deg)`;
+}, 20)
+</script>
