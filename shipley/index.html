@@ -1,25 +1,41 @@
 <img src='shipley-no-hands.png' style=''>
 <img src='hour-hand.png' style='position:absolute;' id='hourHand'>
 <img src='minute-hand.png' style='position:absolute;' id='minuteHand'>
+<img src='hour-hand.png' style='position:absolute;' id='hourHandTwo'>
+<img src='minute-hand.png' style='position:absolute;' id='minuteHandTwo'>
 <script>
 const hourHand = document.getElementById('hourHand')
-hourHand.style.top = 672
+const minuteHand = document.getElementById('minuteHand')
+const hourHandTwo = document.getElementById('hourHandTwo')
+const minuteHandTwo = document.getElementById('minuteHandTwo')
+
+hourHand.style.top = 676
 hourHand.style.left = 840
 hourHand.style['transform-origin'] = '50% 82%';
 
-const minuteHand = document.getElementById('minuteHand')
-minuteHand.style.top = 644
+minuteHand.style.top = 648
 minuteHand.style.left = 840
 minuteHand.style['transform-origin'] = '50% 84%';
+
+hourHandTwo.style.top = 748
+hourHandTwo.style.left = 1397
+hourHandTwo.style['transform-origin'] = '50% 82%';
+
+minuteHandTwo.style.top = 730
+minuteHandTwo.style.left = 1397
+minuteHandTwo.style['transform-origin'] = '50% 82%';
 
 setInterval(() => {
     const now = new Date()
     let nowMinutes = now.getMinutes()
+
     let minuteHandAngle = (nowMinutes / 60) * 360
     let hourHandOffset = (nowMinutes / 60 / 12) * 360 
     let hourHandAngle = (now.getHours() / 24) * 360 * 2 + hourHandOffset
 
     hourHand.style.transform = `rotate(${hourHandAngle}deg)`;
     minuteHand.style.transform = `rotate(${minuteHandAngle}deg)`;
-}, 1000)
+    hourHandTwo.style.transform = `rotateY(85deg) rotate(${hourHandAngle}deg)`;
+    minuteHandTwo.style.transform = `rotateY(85deg) rotate(${minuteHandAngle}deg)`;
+}, 10)
 </script>
