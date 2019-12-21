@@ -1,3 +1,10 @@
+<style>
+body {
+    /* -webkit-transform-style: preserve-3d; */
+    perspective: 8000px;
+    perspective-origin: 60% -50%;
+}
+</style>
 <img src='shipley-no-hands.png' style=''>
 <img src='hour-hand.png' style='position:absolute;' id='hourHand'>
 <img src='minute-hand.png' style='position:absolute;' id='minuteHand'>
@@ -9,33 +16,33 @@ const minuteHand = document.getElementById('minuteHand')
 const hourHandTwo = document.getElementById('hourHandTwo')
 const minuteHandTwo = document.getElementById('minuteHandTwo')
 
-hourHand.style.top = 676
-hourHand.style.left = 840
+hourHand.style.top = 672
+hourHand.style.left = 836
 hourHand.style['transform-origin'] = '50% 82%';
 
-minuteHand.style.top = 648
-minuteHand.style.left = 840
+minuteHand.style.top = 644
+minuteHand.style.left = 836
 minuteHand.style['transform-origin'] = '50% 84%';
 
-hourHandTwo.style.top = 748
-hourHandTwo.style.left = 1397
+hourHandTwo.style.top = 739
+hourHandTwo.style.left = 1386
 hourHandTwo.style['transform-origin'] = '50% 82%';
 
-minuteHandTwo.style.top = 730
-minuteHandTwo.style.left = 1397
+minuteHandTwo.style.top = 721
+minuteHandTwo.style.left = 1390
 minuteHandTwo.style['transform-origin'] = '50% 82%';
 
 setInterval(() => {
     const now = new Date()
     let nowMinutes = now.getMinutes()
-
+    let nowHours = now.getHours()
     let minuteHandAngle = (nowMinutes / 60) * 360
     let hourHandOffset = (nowMinutes / 60 / 12) * 360 
-    let hourHandAngle = (now.getHours() / 24) * 360 * 2 + hourHandOffset
+    let hourHandAngle = (nowHours / 24) * 360 * 2 + hourHandOffset
 
     hourHand.style.transform = `rotate(${hourHandAngle}deg)`;
     minuteHand.style.transform = `rotate(${minuteHandAngle}deg)`;
-    hourHandTwo.style.transform = `rotateY(85deg) rotate(${hourHandAngle}deg)`;
-    minuteHandTwo.style.transform = `rotateY(85deg) rotate(${minuteHandAngle}deg)`;
+    hourHandTwo.style.transform = `rotateY(-90deg) rotate(${hourHandAngle}deg)`;
+    minuteHandTwo.style.transform = `rotateY(-90deg) rotate(${minuteHandAngle}deg)`;
 }, 10)
 </script>
