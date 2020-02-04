@@ -3,32 +3,49 @@ body {
     /* -webkit-transform-style: preserve-3d; */
     perspective: 8000px;
     perspective-origin: 60% -50%;
+    margin: 0px;
 }
 </style>
-<img src='shipley-no-hands.png' style=''>
-<img src='hour-hand.png' style='position:absolute;' id='hourHand'>
-<img src='minute-hand.png' style='position:absolute;' id='minuteHand'>
-<img src='hour-hand.png' style='position:absolute;' id='hourHandTwo'>
-<img src='minute-hand.png' style='position:absolute;' id='minuteHandTwo'>
+<div id='container'>
+    <img src='shipley-no-hands.png' style=''>
+    <img src='hour-hand.png' style='position:absolute;' id='hourHand'>
+    <img src='minute-hand.png' style='position:absolute;' id='minuteHand'>
+    <img src='hour-hand.png' style='position:absolute;' id='hourHandTwo'>
+    <img src='minute-hand.png' style='position:absolute;' id='minuteHandTwo'>
+</div>
 <script>
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const urlYPadding = urlParams.get('yPadding')
+let yPadding = 0
+
+if (urlYPadding) {
+    yPadding = parseInt(urlYPadding)
+}
+
+if (yPadding) {
+    document.getElementById("container").style['padding-top'] = yPadding + 'px';
+}
+
 const hourHand = document.getElementById('hourHand')
 const minuteHand = document.getElementById('minuteHand')
 const hourHandTwo = document.getElementById('hourHandTwo')
 const minuteHandTwo = document.getElementById('minuteHandTwo')
 
-hourHand.style.top = 672
+hourHand.style.top = 672 + yPadding
 hourHand.style.left = 836
 hourHand.style['transform-origin'] = '50% 82%';
 
-minuteHand.style.top = 644
+minuteHand.style.top = 644 + yPadding
 minuteHand.style.left = 836
 minuteHand.style['transform-origin'] = '50% 84%';
 
-hourHandTwo.style.top = 739
+hourHandTwo.style.top = 739 + yPadding
 hourHandTwo.style.left = 1386
 hourHandTwo.style['transform-origin'] = '50% 82%';
 
-minuteHandTwo.style.top = 721
+minuteHandTwo.style.top = 721 + yPadding
 minuteHandTwo.style.left = 1390
 minuteHandTwo.style['transform-origin'] = '50% 82%';
 
@@ -37,7 +54,7 @@ setInterval(() => {
     let nowMinutes = now.getMinutes()
     let nowHours = now.getHours()
     let minuteHandAngle = (nowMinutes / 60) * 360
-    let hourHandOffset = (nowMinutes / 60 / 12) * 360 
+    let hourHandOffset = (nowMinutes / 60 / 12) * 360
     let hourHandAngle = (nowHours / 24) * 360 * 2 + hourHandOffset
 
     hourHand.style.transform = `rotate(${hourHandAngle}deg)`;
